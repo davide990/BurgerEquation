@@ -21,7 +21,9 @@ plot(u0)
 U=zeros(nt,N);
 
 %Implementation of the numerical methods.
+h = waitbar(0,'Initializing waitbar...');
 U(1,:) = u0;
+waitbar(1/nt,h,'Progresso')
  for i = 2 : nt,
   %omogenea (lax-wendroff)
 %  unew(2:end-1) = u(2:end-1) ...
@@ -35,13 +37,16 @@ U(1,:) = u0;
   
   %parte viscosa
 %  visc=0.01;
+  
   unew  = cn_visc(U(i-1,:), dt, dx, visc);
+  waitbar(i/nt,h,sprintf('%d%%',floor((i/nt)*100)))
   U(i,:) = unew;
 %  u = -unew+u_cn'; 
 %  U(i,:) = u(:);
 %U(i,:) = u_cn(:);
 
  end
+ close(h)
 T=linspace(0,tend,nt);
 %Plot of the solutions.
 figure(1)
