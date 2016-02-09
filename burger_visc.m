@@ -1,3 +1,4 @@
+graphics_toolkit('gnuplot');
 %                           -------------Burgers program-------------
 % This program computes numerical solutions for viscid and inviscid Burgers equation.
 % It needs the functions df.m, f.m, nf.m and uinit.m .
@@ -24,6 +25,7 @@ U=zeros(nt,N);
 h = waitbar(0,'Initializing waitbar...');
 U(1,:) = u0;
 waitbar(1/nt,h,'Progresso')
+tic;
  for i = 2 : nt,
   %omogenea (lax-wendroff)
 %  unew(2:end-1) = u(2:end-1) ...
@@ -47,6 +49,8 @@ waitbar(1/nt,h,'Progresso')
 
  end
  close(h)
+TimeSpent = toc;
+fprintf("Tempo impiegato : %s \n", datestr(TimeSpent/86400, 'HH:MM:SS'));
 T=linspace(0,tend,nt);
 %Plot of the solutions.
 figure(1)
