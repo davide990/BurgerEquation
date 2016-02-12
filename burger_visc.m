@@ -18,6 +18,7 @@ dt = tend/nt;
 
 %Set up the initial solution values.
 u0 = uinit(x,ictype); %Call to the function "uinit". u =u0;
+figure(1);
 plot(u0)
 U=zeros(nt,N);
 
@@ -53,9 +54,14 @@ TimeSpent = toc;
 fprintf("Tempo impiegato : %s \n", datestr(TimeSpent/86400, 'HH:MM:SS'));
 T=linspace(0,tend,nt);
 %Plot of the solutions.
-figure(1)
+figure(2)
 surf(x,T,U)
 shading interp
 xlabel('x'), ylabel('t'), zlabel ('u(x,t)');
 grid on
 colormap('hsv');
+figure(3);
+plot(U(end,:));
+hold on;
+plot(U(1,:));
+hold off;
