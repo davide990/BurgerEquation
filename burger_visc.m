@@ -1,4 +1,4 @@
-graphics_toolkit('gnuplot');
+%graphics_toolkit('qt');
 %                           -------------Burgers program-------------
 % This program computes numerical solutions for viscid and inviscid Burgers equation.
 % It needs the functions df.m, f.m, nf.m and uinit.m .
@@ -61,7 +61,10 @@ xlabel('x'), ylabel('t'), zlabel ('u(x,t)');
 grid on
 colormap('hsv');
 figure(3);
-plot(U(end,:));
+plot(U(end,:),'r','LineWidth',2)
 hold on;
-plot(U(1,:));
+plot(U(1,:),'LineWidth',2);
+legend('U(end)','U(1)');
+the_title = sprintf("Num points: %d, num time steps: %d, viscosity: %d",N,nt,visc);
+title(the_title);
 hold off;
